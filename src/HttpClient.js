@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 const CLIENT_TO_SERVER_MESSAGE = 'clientToServerMessage';
 const SERVER_TO_CLIENT_MESSAGE = 'aroundToClientMessage';
 const INITIAL_AROUNDS = 'initialArounds';
-const AROUND_SERVER_URL = process.env.AROUND_SERVER || 'https://192.168.0.12:8080/';
+const AROUND_SERVER_URL = 'https://boiling-castle-21066.herokuapp.com';
 class HttpClient {
 
     constructor() {
