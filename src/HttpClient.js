@@ -6,11 +6,12 @@ import io from 'socket.io-client';
 const CLIENT_TO_SERVER_MESSAGE = 'clientToServerMessage';
 const SERVER_TO_CLIENT_MESSAGE = 'aroundToClientMessage';
 const INITIAL_AROUNDS = 'initialArounds';
-
+const AROUND_SERVER_URL = process.env.AROUND_SERVER || 'https://192.168.0.12:8080/';
 class HttpClient {
 
     constructor() {
-        this.io = io('https://192.168.0.12:8080/');
+        console.log("Connecting to around server: " + AROUND_SERVER_URL);
+        this.io = io(AROUND_SERVER_URL);
         this._bindListenersForAroundsFromServer();
     }
 
