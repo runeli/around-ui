@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
 const defaultState = {
-    arounds: [],
-
+    arounds: []
 };
 
 class ApplicationStateStore {
@@ -36,7 +35,7 @@ class ApplicationStateStore {
     }
 
     hasArounds() {
-        this._state.arounds.length > 0;
+        return this._state.arounds.length > 0;
     }
 
     addStateChangeListener(handlerFunction) {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class PostActionButton extends React.Component {
 
     _handleButtonClick() {
-        this.context.router.history.push('/postMessage');
+        this.context.router.history.push('/postAround');
     }
 
     render() {

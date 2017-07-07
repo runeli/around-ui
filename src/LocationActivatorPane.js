@@ -1,25 +1,10 @@
 import * as React from 'react';
-import LocationService from './LocationService';
 import PropTypes from 'prop-types';
 
 class LocationActivatorPane extends React.Component {
 
-  checkUserLocation() {
-    LocationService.isLocationAllowed().then(isAllowed => {
-      if(isAllowed) {
-        this.redirectToMapView();
-      } else {
-        this.redirectToAroundListView();
-      }
-    })
-  }
-
-  redirectToMapView() {
-    this.context.router.history.push('/map');
-  }
-
   redirectToAroundListView() {
-    this.context.router.history.push('/postMessage');
+    this.context.router.history.push('/arounds');
   }
 
   render() {
@@ -29,7 +14,7 @@ class LocationActivatorPane extends React.Component {
             <div className="intro-card">
               <h3 className="display-middle">Get started</h3>
               <p>You will be prompted to share your location</p>            
-              <button className="around-main-button aligner-item display-middle" onClick={this.checkUserLocation.bind(this)}>Get started</button>           
+              <button className="around-main-button aligner-item display-middle" onClick={this.redirectToAroundListView.bind(this)}>Get started</button>           
             </div>
           </div>
         </div>
