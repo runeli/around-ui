@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <MuiThemeProvider>
-          <div style={{overflow: 'hidden'}}>            
+          <div>            
             <RuneliRouter />
           </div>
         </MuiThemeProvider>

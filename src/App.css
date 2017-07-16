@@ -247,5 +247,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 5px;
   padding-right: 5px;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 10px, rgba(0, 0, 0, 1) 0px 1px 10px;
+  box-shadow:rgba(0, 0, 0, 0.12) 0px 5px 10px; 
+  width: 100%;
 }

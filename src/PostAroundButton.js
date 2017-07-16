@@ -3,9 +3,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import PropTypes from 'prop-types';
 
 class GotoAroundViewButton extends React.Component {
-
-
-
     render() {
         const style = this.props.visible ? {} : { right: -65 };
         return (

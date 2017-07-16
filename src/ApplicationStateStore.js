@@ -26,7 +26,7 @@ class ApplicationStateStore {
     
     addAroundList(aroundList) {
         const clonedState = this.getClonedState();
-        this.setState({arounds: clonedState.arounds.concat(aroundList)});
+        this.setState({arounds: clonedState.arounds.concat(aroundList).sort(this._getComparator())});
     }
 
     addSingleAround(singleAround) {
@@ -51,6 +51,17 @@ class ApplicationStateStore {
         this.stateChangeHandlers.forEach(handler => {
             handler(this._state);
         });
+    }
+
+    _getComparator() {
+        return (a, b) => {
+            console.log(a, b);
+            if(a.date.getTime() < b.date.getTime()) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
     }
 }
 

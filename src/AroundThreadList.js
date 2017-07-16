@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import ApplicationStateStore from './ApplicationStateStore';
-import HttpClient from './HttpClient';
 import GotoPostAroundViewButton from './GotoPostAroundViewButton';
 import SingleAroundThread from './SingleAroundThread';
 import PropTypes from 'prop-types';
-import CSSTransitionGroup from 'react-transition-group';
 
 class AroundThreadList extends Component {
 
@@ -17,7 +15,7 @@ class AroundThreadList extends Component {
     }
 
     handleThreadClick(threadId) {
-        this.context.router.history.push('/thread/'+ threadId);      
+        this.context.router.history.push('/thread/'+ threadId);
     }
 
     componentDidMount() {
@@ -25,8 +23,8 @@ class AroundThreadList extends Component {
         this.stateChangeListernerCallbackId = ApplicationStateStore.addStateChangeListener(this._setThreads.bind(this))
     }
 
-    _addInitialArounds() {
-      
+    componentWillUnmount() {
+        ApplicationStateStore.removeStateChangeListerner(this.stateChangeListernerCallbackId);
     }
 
     _setThreads(aroundThreads) {

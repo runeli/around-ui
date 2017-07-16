@@ -5,9 +5,13 @@ import HttpClient from './HttpClient';
 class ThreadView extends Component {
 
     componentDidMount() {
-        ApplicationStateStore.addStateChangeListener(() => {
+        this.stateChangeListernerCallbackId = ApplicationStateStore.addStateChangeListener(() => {
             this.forceUpdate();
         });
+    }
+
+    componentWillUnmount() { 
+        ApplicationStateStore.removeStateChangeListerner(this.stateChangeListernerCallbackId);
     }
 
     _getThreadByIdFromStore(threadId) {
