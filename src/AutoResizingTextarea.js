@@ -4,7 +4,8 @@ class AutoResizingTextarea extends Component {
 
     constructor() {
         super();
-        this._initialHeight = '16pt';
+        this._initialHeight = 'auto';
+        this._previousRenderHeight = 0;
     }
 
     componentDidUpdate() {
@@ -22,8 +23,12 @@ class AutoResizingTextarea extends Component {
         this._ta.style.height = (this._ta.scrollHeight - paddings).toString() + 'px';
     }
 
+    _setHeight(height) {
+        this._ta.style.height = height + 'px';
+    }
+
     render() {
-        return <textarea ref={ta => {this._ta = ta}} {...this.props} />        
+        return <textarea ref={ta => {this._ta = ta}} {...this.props} rows="1" />        
     }
 }
 

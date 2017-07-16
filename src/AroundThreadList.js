@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ApplicationStateStore from './ApplicationStateStore';
 import HttpClient from './HttpClient';
-import PostActionButton from './PostActionButton';
+import GotoPostAroundViewButton from './GotoPostAroundViewButton';
 import SingleAroundThread from './SingleAroundThread';
 import PropTypes from 'prop-types';
 import CSSTransitionGroup from 'react-transition-group';
@@ -53,7 +53,7 @@ class AroundThreadList extends Component {
         return (
             <div className="thread-list-wrapper">
                 {this._buildAroundThreadList()}
-                <PostActionButton />
+                <GotoPostAroundViewButton />
             </div>
         );
     }

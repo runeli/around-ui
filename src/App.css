@@ -171,6 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgb(0, 188, 212);
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
+  transition: all 0.3s ease;
 }
 
 .round-floating-action-button svg {
@@ -226,24 +227,6 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(-100%);
 }
 
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-
 .new-around-input-textarea {
   width: 100%;
   border: none;
@@ -251,7 +234,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: transparent;
   font-size: 16pt;
   font-family: 'Arial';  
-  height: 16pt
+  height: 16pt;
+  transition: all .5s ease;
+  padding: 15px;
 }
 
 .new-around-input-textarea:focus, .new-around-input-textarea:focus {
