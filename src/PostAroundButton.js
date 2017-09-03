@@ -2,7 +2,7 @@ import React from 'react';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import PropTypes from 'prop-types';
 
-class GotoAroundViewButton extends React.Component {
+class PostAroundButton extends React.Component {
     render() {
         const style = this.props.visible ? {} : { right: -65 };
         return (
@@ -13,9 +13,9 @@ class GotoAroundViewButton extends React.Component {
     }
 }
 
-GotoAroundViewButton.contextTypes = {
+PostAroundButton.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
 
-export default GotoAroundViewButton;
+export default PostAroundButton;

@@ -36,9 +36,7 @@ class AroundThreadList extends Component {
     
     _buildAroundThreadList() {
         return this.state.aroundThreads.map(thread => {
-            const animatingCssClass = this.state.activeThreadId !== null && this.state.activeThreadId !== thread.threadId ? 'move-left' : '';
             return <SingleAroundThread
-                animatingCssClass={animatingCssClass} 
                 key={thread.threadId}
                 initialMessage={thread.aroundMessages[0].messageBody}
                 onThreadClick={this.handleThreadClick.bind(this, thread.threadId)}

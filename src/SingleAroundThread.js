@@ -9,7 +9,7 @@ class SingleAroundThread extends Component {
 
     render() {
         return (
-            <div ref={(div) => {this.threadContainer = div;}} className={"around-thread " + this.props.animatingCssClass} onClick={this._handleOnThreadClick.bind(this)}>
+            <div ref={(div) => {this.threadContainer = div;}} className="around-thread" onClick={this._handleOnThreadClick.bind(this)}>
                 {this.props.initialMessage}
             </div>
         );

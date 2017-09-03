@@ -1,29 +1,12 @@
 import ApplicationStateStore from './ApplicationStateStore';
-import io from 'socket.io-client';
 import request from 'superagent';
 
 const AROUND_SERVER_URL = 'http://localhost:443';
-
-const CommunicationEvents = {
-    INITIAL_AROUNDS: "initialArounds",
-    ADD_AROUND_MESSAGE: "addAroundMessage",
-    REMOVE_THREAD: "removeThread",
-    REMOVE_AROUND_MESSAGE: "removeMessageFromThread",
-    VOTE_THREAD_UP: "voteThreadUp",
-    VOTE_THREAD_DOWN: "voteThreadUp",
-    GET_NEARBY_THREADS: "getNearbyThreads",
-    AROUND_THREAD_CREATED: "aroundThreadCreated",
-    AROUND_ADDED_TO_THREAD: "aroundAddedToThread",
-    CONNECTED: 'connect',
-    DISCONNECTED: 'disconnect'
-}
 
 class HttpClient {
 
     constructor() {
         console.log("Connecting to around server: " + AROUND_SERVER_URL);
-        this.io = io(AROUND_SERVER_URL);
-        this._bindListenersForAroundsFromServer();
         this._getInitialArounds();
     }
 
@@ -53,7 +36,11 @@ class HttpClient {
             messageId,
             location: location
         };
-        this.io.emit(CommunicationEvents.ADD_AROUND_MESSAGE, messageToServer);
+        request
+            .post(`${AROUND_SERVER_URL}/api/thread`)
+            .send(messageToServer).then(() => {alert(
+                'sent!'
+            )}).end;
     }
 
     async getSingleAroundThread(threadId) {
@@ -62,10 +49,7 @@ class HttpClient {
     }
     
     _bindListenersForAroundsFromServer() {
-        this.io.on(CommunicationEvents.CONNECTED, this._connected);
-        this.io.on(CommunicationEvents.DISCONNECTED, this._disconnect);
-        this.io.on(CommunicationEvents.AROUND_THREAD_CREATED, this._handleAroundThreadAdded.bind(this));
-        this.io.on(CommunicationEvents.AROUND_ADDED_TO_THREAD, this._handleAroundAddedToThread.bind(this));
+
     }
 
     _connected() {
