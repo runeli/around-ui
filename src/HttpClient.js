@@ -29,27 +29,24 @@ class HttpClient {
         ApplicationStateStore.addSingleAround(aroundMessage);
     }
 
-    async addAroundMessage(threadId, messageId, initialMessageBody, location) {
+    async addAroundMessage(threadId, initialMessageBody, location) {
         const messageToServer = {
             messageBody: initialMessageBody,
             date: new Date(),
-            messageId,
             location: location
         };
-        request
+        const response = await request
             .post(`${AROUND_SERVER_URL}/api/thread`)
-            .send(messageToServer).then(() => {alert(
-                'sent!'
-            )}).end;
+            .send(messageToServer);
+            if(response.body) {
+                response.body.date = new Date(response.body.date);
+            }
+        return response.body;
     }
 
     async getSingleAroundThread(threadId) {
         const response = await request.get(`${AROUND_SERVER_URL}/api/thread/${threadId}`);
-        this.addAroundThreadToStore(response);
-    }
-    
-    _bindListenersForAroundsFromServer() {
-
+        this.addAroundThreadToStore(this._deserializeThreadAndItsMessages(response.body.thread));
     }
 
     _connected() {
@@ -63,32 +60,35 @@ class HttpClient {
     async _getInitialArounds() {
         console.log('Fetching initial arounds...')
         const response = await request.get(`${AROUND_SERVER_URL}/api/threads/`);
-        this._initialArounds(response.body);
-    }
-
-    _initialArounds(initialArounds) {
+        const initialArounds = response.body;
         if(initialArounds.length === 0) {
             console.warn(`Got an empty initial response from the server`);
         } else {
             const messageCount = initialArounds.map(arthread => arthread.aroundMessages.length).reduce((a,b) => a + b);
             console.log(`Received ${initialArounds.length} around threads and ${messageCount} messages`);
-            ApplicationStateStore.addAroundList(initialArounds.map(this._deserializeJsonAround));
+            ApplicationStateStore.addAroundList(initialArounds.map(this._deserializeThreadAndItsMessages, this));
         }
     }
 
     _handleAroundThreadAdded(newThread) {
-        ApplicationStateStore.addSingleAround(this._deserializeJsonAround(newThread));
+        ApplicationStateStore.addSingleAround(this._deserializeThreadAndItsMessages(newThread));
     }
 
     _handleAroundAddedToThread(newAround) {
         ApplicationStateStore.addSingleAround(newAround);
     }
 
-    _deserializeJsonAround(jsonAroundThread) {
-        if(typeof jsonAroundThread.date === "string") {
-            jsonAroundThread.date = new Date(jsonAroundThread.date);
-        }
+    _deserializeThreadAndItsMessages(jsonAroundThread) {
+        this._deserializeTimestamp(jsonAroundThread);
+        jsonAroundThread.aroundMessages.map(this._deserializeTimestamp)
         return jsonAroundThread;
+    }
+
+    _deserializeTimestamp(objectWithDateAsString) {
+        if(typeof objectWithDateAsString.date === "string") {
+            objectWithDateAsString.date = new Date(objectWithDateAsString.date);
+        }
+        return objectWithDateAsString;
     }
 }
 

@@ -55,7 +55,8 @@ class ApplicationStateStore {
 
     _getComparator() {
         return (a, b) => {
-            console.log(a, b);
+            
+        console.log(a);
             if(a.date.getTime() < b.date.getTime()) {
                 return 1;
             } else {

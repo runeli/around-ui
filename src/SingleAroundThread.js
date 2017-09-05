@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class SingleAroundThread extends Component {
 
     _handleOnThreadClick() {
-        //this.threadContainer.setAttribute("style", `margin-top:-${this.threadContainer.getBoundingClientRect().top - 64}px;`);
         this.props.onThreadClick();
     }
 
