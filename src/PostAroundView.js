@@ -4,6 +4,7 @@ import PostAroundButton from './PostAroundButton';
 import HttpClient from './HttpClient';
 import PropTypes from 'prop-types';
 import ApplicationStateStore from './ApplicationStateStore';
+import LocationDisplayPane from './LocationDisplayPane';
 
 class PostAroundView extends Component {
 
@@ -38,6 +39,7 @@ class PostAroundView extends Component {
                         spellCheck="false"
                         placeholder="Whats is happening around you?"/>
                 <PostAroundButton visible={this.state.valueToBePosted.length > 0} onClick={this.handlePostNewAround.bind(this)}/>
+                <LocationDisplayPane />
             </div>
 
         );

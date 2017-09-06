@@ -1,7 +1,8 @@
 import ApplicationStateStore from './ApplicationStateStore';
 import request from 'superagent';
 
-const AROUND_SERVER_URL = 'http://localhost:443';
+const AROUND_SERVER_URL = 'http://192.168.0.12:443';
+const IP_BASED_LOCATION_API = 'http://ip-api.com/json';
 
 class HttpClient {
 
@@ -47,6 +48,10 @@ class HttpClient {
     async getSingleAroundThread(threadId) {
         const response = await request.get(`${AROUND_SERVER_URL}/api/thread/${threadId}`);
         this.addAroundThreadToStore(this._deserializeThreadAndItsMessages(response.body.thread));
+    }
+
+    async getIpAddressLocationData() {
+        return request.get(`${AROUND_SERVER_URL}/api/ip`);
     }
 
     _connected() {
