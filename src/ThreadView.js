@@ -26,6 +26,7 @@ class ThreadView extends Component {
         }
         const postedReply = await HttpClient.addAroundMessage(threadId, this.state.valueToBePosted);
         ApplicationStateStore.addSingleAroundToAnExistingThread(postedReply);
+        this._setParentScrollToBottom()
         this.setState({valueToBePosted: ''});
     }
 
@@ -33,16 +34,19 @@ class ThreadView extends Component {
         this.stateChangeListernerCallbackId = ApplicationStateStore.addStateChangeListener(() => {
             this.forceUpdate();
         });
+        window.onresize = () => {
+            this.forceUpdate();
+        }
     }
 
-    componentWillUnmount() { 
+    componentWillUnmount() {
+        window.onresize = undefined;
         ApplicationStateStore.removeStateChangeListerner(this.stateChangeListernerCallbackId);
     }
 
     _getThreadByIdFromStore(threadId) {
         const threadData = ApplicationStateStore.getClonedState().arounds.find(thread => thread.threadId === threadId);
-        if(!threadData) {
-            HttpClient.getSingleAroundThread(threadId)
+        if (!threadData) {
             return (<div></div>);
         }
         return this._getThreadMessageElements(threadData)
@@ -54,9 +58,24 @@ class ThreadView extends Component {
         })
     }
 
+    _getParentContainerHeight() {
+        if  (this.container) {
+            return parseInt(getComputedStyle(this.container.parentNode).height, 10);
+        } else {
+            setTimeout(() => {this.forceUpdate()}, 0);
+            return 0;
+        }
+    }
+
+    _setParentScrollToBottom() {
+        this.container.parentNode.scrollTop = this.container.parentNode.scrollHeight
+        console.log();
+    }
+
     render() {
+        const heightOfParentComponent = this._getParentContainerHeight();
         return (
-            <div className="flex-container" style={{height:584}}>
+            <div className="flex-container" style={{height: heightOfParentComponent}} ref={container => { this.container = container; }}>
                 <div className="flex-scalable-content">
                     {this._getThreadByIdFromStore(this.props.match.params.threadId)}
                 </div>
@@ -69,7 +88,8 @@ class ThreadView extends Component {
                             spellCheck="false"
                             placeholder="Reply..."/>
                     <div className="button-reply" onClick={this.handlePostMessageToThread.bind(this)}>➣</div>
-                </div>                
+                </div>
+                
             </div>
         );
     }

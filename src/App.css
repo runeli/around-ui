@@ -3,6 +3,11 @@ html, body, .app, #root, .full-height {
     font-family: Roboto,sans-serif;
     background-color: #eee;
 }
+
+::-webkit-scrollbar { 
+  display: none; 
+}
+
 .aligner {
   display: flex;
   align-items: center;
@@ -126,7 +131,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 8px 8px 0px -16px;
   padding: 12px;
   outline: none;
-  font-size: 0px;
   font-weight: inherit;
   position: relative;
   z-index: 1;
@@ -135,10 +139,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 48px;
   height: 48px;
   background: none;
-}
-
-.around-top-navigation-bar-button svg {
-  color: white!important;
+  color: white;
 }
 
 .round-floating-action-button {
@@ -224,8 +225,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .textarea-container {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
   background-color: white;
   box-shadow:rgba(0, 0, 0, 0.12) 0px 5px 10px; 
   width: 100%;
@@ -280,4 +281,5 @@ img.around-app-logo {
 .flex-scalable-content {
   flex: 1 1 auto;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }

@@ -9,9 +9,9 @@ class AroundBar extends React.Component {
 
     _getCurrentIconOrEmptyIfNoRoutesArePresent() {
         if(this.context.router.route.location.pathname === "/") {
-            return <div>Home</div>
+            return <div></div>
         } else {
-            return <div onClick={this._handleBackButtonClick.bind(this)}>Back</div>
+            return <div onClick={this._handleBackButtonClick.bind(this)}>🡠</div>
         }
     }
 
