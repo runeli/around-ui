@@ -1,6 +1,4 @@
 import React from 'react'
-import NavigationBackSvgIcon from 'material-ui/svg-icons/navigation/arrow-back';
-import ActionHomeSvgIcon from 'material-ui/svg-icons/action/home';
 import PropTypes from 'prop-types';
 
 class AroundBar extends React.Component {
@@ -11,17 +9,16 @@ class AroundBar extends React.Component {
 
     _getCurrentIconOrEmptyIfNoRoutesArePresent() {
         if(this.context.router.route.location.pathname === "/") {
-            return <ActionHomeSvgIcon />
+            return <div>Home</div>
         } else {
-            return <NavigationBackSvgIcon onClick={this._handleBackButtonClick.bind(this)}/>
+            return <div onClick={this._handleBackButtonClick.bind(this)}>Back</div>
         }
     }
 
     render() {
         return (
-            <div className="around-top-navigation-bar">
+            <div className="around-top-navigation-bar flex-fixed">
                 <AroundBarActionButton>{this._getCurrentIconOrEmptyIfNoRoutesArePresent()}</AroundBarActionButton>
-                <AroundBarTitle></AroundBarTitle>
             </div>
         );
     }

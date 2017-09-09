@@ -56,9 +56,11 @@ class ThreadView extends Component {
 
     render() {
         return (
-            <div>
-                {this._getThreadByIdFromStore(this.props.match.params.threadId)}
-                <div className="bottom-fixed-textarea-container">
+            <div className="flex-container" style={{height:584}}>
+                <div className="flex-scalable-content">
+                    {this._getThreadByIdFromStore(this.props.match.params.threadId)}
+                </div>
+                <div className="bottom-fixed-textarea-container flex-fixed">
                     <AutoResizingTextarea 
                             className="new-around-input-textarea textarea-container" 
                             value={this.state.valueToBePosted} 
@@ -66,7 +68,7 @@ class ThreadView extends Component {
                             autoComplete="false" 
                             spellCheck="false"
                             placeholder="Reply..."/>
-                <div className="button-reply" onClick={this.handlePostMessageToThread.bind(this)}>➣</div>
+                    <div className="button-reply" onClick={this.handlePostMessageToThread.bind(this)}>➣</div>
                 </div>                
             </div>
         );

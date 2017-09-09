@@ -32,11 +32,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0px auto;
 }
 
-#mapContainerId { 
-    height: 100vh;
-    width: 100vw;
-}
-
 .post-message-input-new-message {
   margin-left: 20px;
   margin-right: 20px;
@@ -53,17 +48,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .float-left {
   float: left;
-}
-
-.input-container-new-message-container {
-  display: flex;
-  position: absolute;
-  bottom: 0px;
-  width:100%;
-  background-color: white;
-  padding-top: 8px;
-  padding-bottom: 0px;
-  box-shadow: 0px 1px 16px -1px rgba(0,0,0,0.55);
 }
 
 .flex-grow {
@@ -95,8 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .thread-list-wrapper {
   overflow-y: scroll;
-  height: inherit;
-  position: relative;
+  flex: 1 1 auto;
 }
 
 .thread-list-wrapper::-webkit-scrollbar { 
@@ -111,10 +94,8 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
     border-radius: 0px;
-    position: fixed;
     z-index: 1100;
     width: 100%;
-    display: flex;
     padding-left: 24px;
     padding-right: 24px;
     top: 0px;
@@ -209,6 +190,7 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid #DDD;
     opacity: 1;
     transition: all 0.5s ease;
+    flex: 1 1 auto;
 }
 .around-thread-inactive {
   opacity: 0;
@@ -261,7 +243,6 @@ img.around-app-logo {
 }
 
 .bottom-fixed-textarea-container {
-  position: fixed;
   bottom: -5px;
   width: 100%;
   background-color: white;
@@ -284,4 +265,19 @@ img.around-app-logo {
   padding-bottom: 5px;
   cursor: pointer;
   user-select: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.flex-fixed {
+  flex: 0 0 auto;
+}
+
+.flex-scalable-content {
+  flex: 1 1 auto;
+  overflow-y: scroll;
 }

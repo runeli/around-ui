@@ -1,18 +1,13 @@
 import * as React from 'react';
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RuneliRouter from './Router';
 
 class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
-        <MuiThemeProvider>
-          <div>            
-            <RuneliRouter />
-          </div>
-        </MuiThemeProvider>
+      <div className="app">          
+        <RuneliRouter />
       </div>
     );
   }

@@ -8,15 +8,14 @@ import PostAroundView from './PostAroundView';
 
 const Routes = () => (
   <Router>     
-      <div>
+      <div className="flex-container">
         <AroundBar />
-        <div style={{paddingTop: 64}}>
+        <div className="flex-scalable-content">
           <Route exact path="/" component={LocationActivatorPane}/>
           <Route path="/arounds" component={AroundThreadList}/>
           <Route path="/thread/:threadId" component={ThreadView} />
           <Route path="/postAround" component={PostAroundView} />
         </div>
-
       </div>
   </Router>
 )
