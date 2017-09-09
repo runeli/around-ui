@@ -21,7 +21,7 @@ class AroundBar extends React.Component {
         return (
             <div className="around-top-navigation-bar">
                 <AroundBarActionButton>{this._getCurrentIconOrEmptyIfNoRoutesArePresent()}</AroundBarActionButton>
-                <AroundBarTitle>Around</AroundBarTitle>
+                <AroundBarTitle></AroundBarTitle>
             </div>
         );
     }

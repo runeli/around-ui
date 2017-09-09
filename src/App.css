@@ -24,6 +24,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 60px, rgba(0, 0, 0, 0.22) 0px 15px 20px;
   border-radius: 2px;
+  margin-top: 50px;
 }
 
 .display-middle {
@@ -170,11 +171,10 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
   transition: all 0.3s ease;
-}
-
-.round-floating-action-button svg {
-  padding: 18px;
-  color: white!important;
+  line-height: 60px;
+  text-align: center;
+  color: white;
+  font-size: 24pt;
 }
 
 .around-main-button {
@@ -253,4 +253,35 @@ h1, h2, h3, h4, h5, h6 {
   color: #b3b3b3;
   text-align: center;
   margin-top: 5px;
+}
+
+img.around-app-logo {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+.bottom-fixed-textarea-container {
+  position: fixed;
+  bottom: -5px;
+  width: 100%;
+  background-color: white;
+}
+
+.bottom-fixed-textarea-container .textarea-container{
+  width: 80%;
+  float: left;
+  padding-left: 15px;
+  padding-right: 0px;
+}
+.bottom-fixed-textarea-container .button-reply {
+  float: right;
+  width: 15%;
+  color: #00bcd4;
+  font-size: 2em;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+  cursor: pointer;
+  user-select: none;
 }

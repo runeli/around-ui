@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-
+import logo from './around-app-bg-transparent.png';
 class LocationActivatorPane extends React.Component {
 
   redirectToAroundListView() {
@@ -12,8 +12,8 @@ class LocationActivatorPane extends React.Component {
         <div className="full-height">
           <div className="aligner full-height">
             <div className="intro-card">
-              <h3 className="display-middle">Get started</h3>
-              <p>You will be prompted to share your location</p>            
+              <h3>Around</h3>
+              <img src={logo} className="around-app-logo"/>           
               <button className="around-main-button aligner-item display-middle" onClick={this.redirectToAroundListView.bind(this)}>Get started</button>           
             </div>
           </div>

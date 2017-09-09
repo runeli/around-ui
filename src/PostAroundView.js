@@ -21,8 +21,7 @@ class PostAroundView extends Component {
     }
 
     async handlePostNewAround() {
-        const helsinkiLocation = {lng: 24.9410248, lat:60.1733244};
-        const maybeAroundAdded = await HttpClient.addAroundMessage(null, this.state.valueToBePosted, helsinkiLocation);
+        const maybeAroundAdded = await HttpClient.addAroundMessage(null, this.state.valueToBePosted);
         if(maybeAroundAdded) {
             ApplicationStateStore.addSingleAround(maybeAroundAdded);
         }
@@ -35,7 +34,8 @@ class PostAroundView extends Component {
                     <AutoResizingTextarea 
                         className="new-around-input-textarea textarea-container" 
                         value={this.state.valueToBePosted} 
-                        onChange={this.handleChange} autoComplete="false" 
+                        onChange={this.handleChange} 
+                        autoComplete="false" 
                         spellCheck="false"
                         placeholder="Whats is happening around you?"/>
                 <PostAroundButton visible={this.state.valueToBePosted.length > 0} onClick={this.handlePostNewAround.bind(this)}/>

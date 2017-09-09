@@ -34,6 +34,13 @@ class ApplicationStateStore {
         this.addAroundList(aroundList);
     }
 
+    addSingleAroundToAnExistingThread(aroundThreadContainingNewMessage) {
+        const allArounds = this.getClonedState().arounds;
+        const aroundThreadToModify = allArounds.find(around => around.threadId === aroundThreadContainingNewMessage.threadId);
+        aroundThreadToModify.aroundMessages = aroundThreadContainingNewMessage.aroundMessages;
+        this.setState({arounds: allArounds});
+    }
+
     hasArounds() {
         return this._state.arounds.length > 0;
     }
@@ -55,8 +62,6 @@ class ApplicationStateStore {
 
     _getComparator() {
         return (a, b) => {
-            
-        console.log(a);
             if(a.date.getTime() < b.date.getTime()) {
                 return 1;
             } else {

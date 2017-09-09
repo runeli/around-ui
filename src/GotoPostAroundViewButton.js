@@ -1,5 +1,4 @@
 import React from 'react';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import PropTypes from 'prop-types';
 
 class GotoPostAroundViewButton extends React.Component {
@@ -11,7 +10,7 @@ class GotoPostAroundViewButton extends React.Component {
     render() {
         return (
             <div className="round-floating-action-button" onClick={this._handleButtonClick.bind(this)}>
-                <ContentAdd />
+                +
             </div>
         );
     }

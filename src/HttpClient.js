@@ -34,7 +34,8 @@ class HttpClient {
         const messageToServer = {
             messageBody: initialMessageBody,
             date: new Date(),
-            location: location
+            location,
+            threadId
         };
         const response = await request
             .post(`${AROUND_SERVER_URL}/api/thread`)
