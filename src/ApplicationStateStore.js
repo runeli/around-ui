@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import uuid from 'uuid';
 
 const defaultState = {
     arounds: []
@@ -34,10 +35,14 @@ class ApplicationStateStore {
         this.addAroundList(aroundList);
     }
 
-    addSingleAroundToAnExistingThread(aroundThreadContainingNewMessage) {
+    addSingleAroundToAnExistingThread(aroundMessage) {
+        if (!aroundMessage.messageId) {
+            console.log('Assigned temporary threadId');
+            aroundMessage.messageId = uuid.v4();
+        }
         const allArounds = this.getClonedState().arounds;
-        const aroundThreadToModify = allArounds.find(around => around.threadId === aroundThreadContainingNewMessage.threadId);
-        aroundThreadToModify.aroundMessages = aroundThreadContainingNewMessage.aroundMessages;
+        const aroundThreadToModify = allArounds.find(around => around.threadId === aroundMessage.threadId);
+        aroundThreadToModify.aroundMessages.push(aroundMessage);
         this.setState({arounds: allArounds});
     }
 
@@ -54,11 +59,23 @@ class ApplicationStateStore {
         this.stateChangeHandlers.splice(indexOfHandler, 1);
     }
 
+    updateThreadHavingSameThreadId(threadThatOverridesExistingWithSameThreadId) {
+        const allArounds = this.getClonedState().arounds;
+        try {
+            const aroundMessageToModifyIndex = allArounds.findIndex(around => around.threadId === threadThatOverridesExistingWithSameThreadId.threadId)
+            allArounds[aroundMessageToModifyIndex] = threadThatOverridesExistingWithSameThreadId;
+        } catch (e) {
+            console.warn('Unable to find and update a local message having temporarMessageId')
+        }
+        this.setState({arounds: allArounds});
+    }
+
     _executeStateChangeHandlersWhenStateHasChanged() {
         this.stateChangeHandlers.forEach(handler => {
             handler(this._state);
         });
     }
+    
 
     _getComparator() {
         return (a, b) => {

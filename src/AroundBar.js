@@ -11,14 +11,14 @@ class AroundBar extends React.Component {
         if(this.context.router.route.location.pathname === "/") {
             return <div></div>
         } else {
-            return <div onClick={this._handleBackButtonClick.bind(this)}>🡠</div>
+            return <div>&larr;</div>
         }
     }
 
     render() {
         return (
             <div className="around-top-navigation-bar flex-fixed">
-                <AroundBarActionButton>{this._getCurrentIconOrEmptyIfNoRoutesArePresent()}</AroundBarActionButton>
+                <AroundBarActionButton onClickHandler={this._handleBackButtonClick.bind(this)}>{this._getCurrentIconOrEmptyIfNoRoutesArePresent()}</AroundBarActionButton>
             </div>
         );
     }
@@ -30,13 +30,7 @@ AroundBar.contextTypes = {
 
 class AroundBarActionButton extends React.Component {
     render() {
-        return <div className="around-top-navigation-bar-button" onClick={this.props.onClick}>{this.props.children}</div>
-    }
-}
-
-class AroundBarTitle extends React.Component {
-    render() {
-        return <h1 className="around-top-navigation-bar-title">{this.props.children}</h1>
+        return <div className="around-top-navigation-bar-button" onClick={this.props.onClickHandler}>{this.props.children}</div>
     }
 }
 

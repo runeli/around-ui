@@ -3,6 +3,8 @@ import ApplicationStateStore from './ApplicationStateStore';
 import SingleMessageInThread from './SingleMessageInThread';
 import HttpClient from './HttpClient';
 import AutoResizingTextarea from './AutoResizingTextarea';
+import ReactDOM from 'react-dom';
+
 
 class ThreadView extends Component {
 
@@ -21,12 +23,15 @@ class ThreadView extends Component {
     async handlePostMessageToThread() {
         const threadId = this.props.match.params.threadId;
         const valueToBePosted = this.state.valueToBePosted;
-        if (valueToBePosted.length === 0) {
+        if (valueToBePosted.length === 0  || this._preventPostingAnythingBeforePreviousRequestFinishes) {
             return;
-        }
-        const postedReply = await HttpClient.addAroundMessage(threadId, this.state.valueToBePosted);
-        ApplicationStateStore.addSingleAroundToAnExistingThread(postedReply);
-        this._setParentScrollToBottom()
+        }        
+        const newAroundMessageToServer = this._generateNewAroundMessageThatWillBeSentToServer(threadId, valueToBePosted);
+        ApplicationStateStore.addSingleAroundToAnExistingThread(newAroundMessageToServer);
+        this._preventPostingAnythingBeforePreviousRequestFinishes = true;
+        const postedReply = await HttpClient.addAroundMessage(newAroundMessageToServer);
+        this._preventPostingAnythingBeforePreviousRequestFinishes = false;
+        ApplicationStateStore.updateThreadHavingSameThreadId(postedReply);
         this.setState({valueToBePosted: ''});
     }
 
@@ -44,6 +49,14 @@ class ThreadView extends Component {
         ApplicationStateStore.removeStateChangeListerner(this.stateChangeListernerCallbackId);
     }
 
+    componentDidUpdate() {
+        const allThreads = ReactDOM.findDOMNode(this).querySelectorAll('.around-thread');
+        if(allThreads.length > 0) {
+            const last = allThreads[allThreads.length - 1];
+            this._setParentScrollToBottom(last);
+        }
+    }
+
     _getThreadByIdFromStore(threadId) {
         const threadData = ApplicationStateStore.getClonedState().arounds.find(thread => thread.threadId === threadId);
         if (!threadData) {
@@ -53,9 +66,7 @@ class ThreadView extends Component {
     }
 
     _getThreadMessageElements(threadData) {
-        return threadData.aroundMessages.map((message, i) => {
-            return <SingleMessageInThread key={message.messageId}>{message.messageBody}</SingleMessageInThread>
-        })
+        return threadData.aroundMessages.map(message => <SingleMessageInThread key={message.messageId}>{message.messageBody}</SingleMessageInThread>)
     }
 
     _getParentContainerHeight() {
@@ -67,9 +78,17 @@ class ThreadView extends Component {
         }
     }
 
-    _setParentScrollToBottom() {
-        this.container.parentNode.scrollTop = this.container.parentNode.scrollHeight
-        console.log();
+    _setParentScrollToBottom(elementToScrollTo) {
+        elementToScrollTo.scrollIntoView();
+    }
+
+    _generateNewAroundMessageThatWillBeSentToServer(threadId, initialMessageBody, location) {
+        return {
+            messageBody: initialMessageBody,
+            date: new Date(),
+            location,
+            threadId
+        };
     }
 
     render() {

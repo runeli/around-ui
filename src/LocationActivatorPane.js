@@ -13,7 +13,7 @@ class LocationActivatorPane extends React.Component {
           <div className="aligner full-height">
             <div className="intro-card">
               <h3>Around</h3>
-              <img src={logo} className="around-app-logo"/>           
+              <img src={logo} className="around-app-logo" alt="around logo"/>           
               <button className="around-main-button aligner-item display-middle" onClick={this.redirectToAroundListView.bind(this)}>Get started</button>           
             </div>
           </div>

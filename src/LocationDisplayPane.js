@@ -17,7 +17,7 @@ class LocationDisplayPane extends Component {
     }
 
     componentWillMount() {
-        const ipAddressLocationData = HttpClient.getIpAddressLocationData().then(locationData => {            
+        HttpClient.getIpAddressLocationData().then(locationData => {            
             this.setState({
                 city: locationData.body.city,
                 locationFetchState: 'SUCCESS'

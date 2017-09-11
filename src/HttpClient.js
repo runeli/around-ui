@@ -2,7 +2,6 @@ import ApplicationStateStore from './ApplicationStateStore';
 import request from 'superagent';
 
 const AROUND_SERVER_URL = 'http://192.168.0.12:443';
-const IP_BASED_LOCATION_API = 'http://ip-api.com/json';
 
 class HttpClient {
 
@@ -30,13 +29,7 @@ class HttpClient {
         ApplicationStateStore.addSingleAround(aroundMessage);
     }
 
-    async addAroundMessage(threadId, initialMessageBody, location) {
-        const messageToServer = {
-            messageBody: initialMessageBody,
-            date: new Date(),
-            location,
-            threadId
-        };
+    async addAroundMessage(messageToServer) {
         const response = await request
             .post(`${AROUND_SERVER_URL}/api/thread`)
             .send(messageToServer);

@@ -21,7 +21,11 @@ class PostAroundView extends Component {
     }
 
     async handlePostNewAround() {
-        const maybeAroundAdded = await HttpClient.addAroundMessage(null, this.state.valueToBePosted);
+        const messageToServer = {
+            messageBody: this.state.valueToBePosted,
+            date: new Date()
+        };
+        const maybeAroundAdded = await HttpClient.addAroundMessage(messageToServer);
         if(maybeAroundAdded) {
             ApplicationStateStore.addSingleAround(maybeAroundAdded);
         }
