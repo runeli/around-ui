@@ -1,7 +1,6 @@
 html, body, .app, #root, .full-height {
     height: 100%;
-    font-family: Roboto,sans-serif;
-    background-color: #eee;
+    
 }
 
 html, body {
@@ -13,6 +12,8 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #eee;  
+  font-family: Roboto,sans-serif;
 }
 
 ::-webkit-scrollbar { 
@@ -38,7 +39,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 20px;
   padding-bottom: 20px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 60px, rgba(0, 0, 0, 0.22) 0px 15px 20px;
   border-radius: 2px;
   margin-top: 50px;
 }
@@ -293,4 +293,16 @@ img.around-app-logo {
   flex: 1 1 auto;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
+
+.app .app-container {
+  height: calc(100% - 38px);
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 900px;
+  margin: 0px auto;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 60px, rgba(0, 0, 0, 0.22) 0px 15px 20px;
+  background-color:white;
+  width: 100%;
 }

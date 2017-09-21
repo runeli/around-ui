@@ -7,9 +7,10 @@ import ThreadView from './ThreadView'
 import PostAroundView from './PostAroundView';
 
 const Routes = () => (
-  <Router>     
-      <div className="flex-container">
-        <AroundBar />
+  <Router>
+    <div className="flex-container">
+    <AroundBar />
+    <div className="flex-container app-container">        
         <div className="flex-scalable-content">
           <Route exact path="/" component={LocationActivatorPane}/>
           <Route path="/arounds" component={AroundThreadList}/>
@@ -17,6 +18,8 @@ const Routes = () => (
           <Route path="/postAround" component={PostAroundView} />
         </div>
       </div>
+    </div>
+
   </Router>
 )
 export default Routes

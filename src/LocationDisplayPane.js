@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import HttpClient from './HttpClient';
+import ApplicationStateStore from './ApplicationStateStore';
 
 const locationFetchState = {
     PENDING: 'PENDING',
@@ -17,23 +18,32 @@ class LocationDisplayPane extends Component {
     }
 
     componentWillMount() {
-        HttpClient.getIpAddressLocationData().then(locationData => {            
+        const maybeLocation = ApplicationStateStore.getCurrentLocationName();
+        if(maybeLocation) {
             this.setState({
-                city: locationData.body.city,
-                locationFetchState: 'SUCCESS'
+                locationName: maybeLocation,
+                locationFetchState: locationFetchState.SUCCESS
             });
-        }).catch(this._displayLocationErrorWarning.bind(this));
+        } else {
+            HttpClient.getIpAddressLocationData().then(locationData => {            
+                ApplicationStateStore.setCurrentLocationName(locationData.body.city);
+                this.setState({
+                    locationName: locationData.body.city,
+                    locationFetchState: locationFetchState.SUCCESS
+                });
+            }).catch(this._displayLocationErrorWarning.bind(this));
+        }
     }
 
     _displayLocationErrorWarning() {
         this.setState({
-            locationFetchState: 'FAILED'
+            locationFetchState: locationFetchState.FAILED
         });
     }
 
-    _getLocationFetchText(state, city) {
+    _getLocationFetchText(state, locationName) {
         if(state === locationFetchState.SUCCESS) {
-            return '♡ ' + city;
+            return '♡ ' + locationName;
         } else if(state === locationFetchState.PENDING) {
             return 'Loading location data...';
         } else {
@@ -41,8 +51,15 @@ class LocationDisplayPane extends Component {
         }
     }
 
+    _setLocation(locationName) {
+        this.setState({
+            locationName,
+            locationFetchState: locationFetchState.SUCCESS
+        });
+    }
+
     render() {
-        const displayText = this._getLocationFetchText(this.state.locationFetchState, this.state.city);
+        const displayText = this._getLocationFetchText(this.state.locationFetchState, this.state.locationName);
         return (
             <div className="location-display-pane">
                 {displayText}

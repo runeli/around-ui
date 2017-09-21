@@ -70,6 +70,14 @@ class ApplicationStateStore {
         this.setState({arounds: allArounds});
     }
 
+    setCurrentLocationName(locationName) {
+        this.setState({locationName});
+    }
+
+    getCurrentLocationName() {
+        return this._state.locationName;
+    }
+
     _executeStateChangeHandlersWhenStateHasChanged() {
         this.stateChangeHandlers.forEach(handler => {
             handler(this._state);

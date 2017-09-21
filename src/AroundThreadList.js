@@ -3,6 +3,7 @@ import ApplicationStateStore from './ApplicationStateStore';
 import GotoPostAroundViewButton from './GotoPostAroundViewButton';
 import SingleAroundThread from './SingleAroundThread';
 import PropTypes from 'prop-types';
+import LocationDisplayPane from './LocationDisplayPane';
 
 class AroundThreadList extends Component {
 
@@ -40,7 +41,6 @@ class AroundThreadList extends Component {
                 key={thread.threadId}
                 initialMessage={thread.aroundMessages[0].messageBody}
                 onThreadClick={this.handleThreadClick.bind(this, thread.threadId)}
-
             />;
         });
     }
@@ -48,6 +48,7 @@ class AroundThreadList extends Component {
     render() {
         return (
             <div className="thread-list-wrapper">
+                <LocationDisplayPane />
                 {this._buildAroundThreadList()}
                 <GotoPostAroundViewButton />
             </div>
