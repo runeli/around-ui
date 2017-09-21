@@ -12,8 +12,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #eee;  
-  font-family: Roboto,sans-serif;
+  background-color: #eee;
 }
 
 ::-webkit-scrollbar { 
@@ -305,4 +304,11 @@ img.around-app-logo {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 60px, rgba(0, 0, 0, 0.22) 0px 15px 20px;
   background-color:white;
   width: 100%;
+}
+@media (max-width: 940px) {
+  .app .app-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
 }
