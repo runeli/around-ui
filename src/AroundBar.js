@@ -11,7 +11,7 @@ class AroundBar extends React.Component {
         if(this.context.router.route.location.pathname === "/") {
             return <div></div>
         } else {
-            return <div>&larr;</div>
+            return <div>◀</div>
         }
     }
 

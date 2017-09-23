@@ -41,6 +41,7 @@ class AroundThreadList extends Component {
                 key={thread.threadId}
                 initialMessage={thread.aroundMessages[0].messageBody}
                 onThreadClick={this.handleThreadClick.bind(this, thread.threadId)}
+                count={thread.aroundMessages.length}
             />;
         });
     }

@@ -12,7 +12,7 @@ const Routes = () => (
     <AroundBar />
     <div className="flex-container app-container">        
         <div className="flex-scalable-content">
-          <Route exact path="/" component={LocationActivatorPane}/>
+          <Route exact path="/" component={AroundThreadList}/>
           <Route path="/arounds" component={AroundThreadList}/>
           <Route path="/thread/:threadId" component={ThreadView} />
           <Route path="/postAround" component={PostAroundView} />

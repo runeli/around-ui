@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ChatBubble from './ChatBubble';
 class SingleAroundThread extends Component {
 
     _handleOnThreadClick() {
@@ -9,7 +9,8 @@ class SingleAroundThread extends Component {
     render() {
         return (
             <div ref={(div) => {this.threadContainer = div;}} className="around-thread" onClick={this._handleOnThreadClick.bind(this)}>
-                {this.props.initialMessage}
+                {this.props.initialMessage}                
+                <ChatBubble count={this.props.count}/>
             </div>
         );
     }
