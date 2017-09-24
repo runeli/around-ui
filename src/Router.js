@@ -1,6 +1,5 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import LocationActivatorPane from './LocationActivatorPane';
 import AroundBar from './AroundBar';
 import AroundThreadList from './AroundThreadList';
 import ThreadView from './ThreadView'

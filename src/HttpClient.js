@@ -1,12 +1,13 @@
 import ApplicationStateStore from './ApplicationStateStore';
 import request from 'superagent';
 
-const AROUND_SERVER_URL = 'http://192.168.0.12:443';
+
 
 class HttpClient {
 
-    constructor() {
-        console.log("Connecting to around server: " + AROUND_SERVER_URL);
+    constructor() {        
+        this.aroundServerUrl = HttpClient._getHostname();
+        console.log("Connecting to around server: " + this.aroundServerUrl);
         this._getInitialArounds();
     }
 
@@ -31,7 +32,7 @@ class HttpClient {
 
     async addAroundMessage(messageToServer) {
         const response = await request
-            .post(`${AROUND_SERVER_URL}/api/thread`)
+            .post(`${this.aroundServerUrl}/api/thread`)
             .send(messageToServer);
             if(response.body) {
                 response.body.date = new Date(response.body.date);
@@ -40,16 +41,16 @@ class HttpClient {
     }
 
     async getSingleAroundThread(threadId) {
-        const response = await request.get(`${AROUND_SERVER_URL}/api/thread/${threadId}`);
+        const response = await request.get(`${this.aroundServerUrl}/api/thread/${threadId}`);
         this.addAroundThreadToStore(this._deserializeThreadAndItsMessages(response.body.thread));
     }
 
     async getIpAddressLocationData() {
-        return request.get(`${AROUND_SERVER_URL}/api/ip`);
+        return request.get(`${this.aroundServerUrl}/api/ip`);
     }
 
     _connected() {
-        console.log('Connected to around server ' + AROUND_SERVER_URL);
+        console.log('Connected to around server ' + this.aroundServerUrl);
     }
 
     _disconnect() {
@@ -57,8 +58,8 @@ class HttpClient {
     }
 
     async _getInitialArounds() {
-        console.log('Fetching initial arounds...')
-        const response = await request.get(`${AROUND_SERVER_URL}/api/threads/`);
+        console.log('Fetching initial arounds...');
+        const response = await request.get(`${this.aroundServerUrl}/api/threads/`);
         const initialArounds = response.body;
         if(initialArounds.length === 0) {
             console.warn(`Got an empty initial response from the server`);
@@ -88,6 +89,14 @@ class HttpClient {
             objectWithDateAsString.date = new Date(objectWithDateAsString.date);
         }
         return objectWithDateAsString;
+    }
+
+    static _getHostname() {
+        if(process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+            return 'https://around-app-server.herokuapp.com';
+        } else {
+            return 'http://192.168.0.12:443';
+        }
     }
 }
 
