@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 class AroundBar extends React.Component {
 
     _handleBackButtonClick() {
-        this.context.router.history.goBack()
+        if(this.context.router.route.location.pathname !== "/") {
+            this.context.router.history.goBack();
+        }
     }
 
     _getCurrentIconOrEmptyIfNoRoutesArePresent() {
         if(this.context.router.route.location.pathname === "/") {
             return <div></div>
         } else {
-            return <div>◀</div>
+            return <div>BACK</div>
         }
     }
 

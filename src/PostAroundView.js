@@ -36,7 +36,7 @@ class PostAroundView extends Component {
         return (
             <div style={{width: '100%'}}>
                     <AutoResizingTextarea 
-                        className="new-around-input-textarea textarea-container" 
+                        className="new-around-input-textarea textarea-container new-thread-textarea" 
                         value={this.state.valueToBePosted} 
                         onChange={this.handleChange} 
                         autoComplete="false" 
