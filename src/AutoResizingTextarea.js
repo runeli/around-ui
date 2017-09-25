@@ -28,7 +28,11 @@ class AutoResizingTextarea extends Component {
     }
 
     render() {
-        return <textarea ref={ta => {this._ta = ta}} {...this.props} rows="1" />        
+        return (
+            <div className="textarea-wrapper">
+                <textarea ref={ta => {this._ta = ta}} {...this.props} rows="1" />                
+            </div>
+        )
     }
 }
 

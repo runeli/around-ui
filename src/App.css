@@ -232,7 +232,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Arial';  
   height: 16pt;
   transition: all .5s ease;
-  padding: 15px;
 }
 
 .new-around-input-textarea:focus, .new-around-input-textarea:focus {
@@ -258,28 +257,41 @@ img.around-app-logo {
 }
 
 .bottom-fixed-textarea-container {
-  bottom: -5px;
-  width: 100%;
   background-color: white;
+  display: flex;
+  min-height: 50px;
+  
 }
 
-.bottom-fixed-textarea-container .textarea-container{
-  width: 80%;
-  float: left;
-  padding-left: 15px;
-  padding-right: 0px;
+.bottom-fixed-textarea-container textarea {
+  padding: 0px;
+  width: 100%;
 }
+
+.bottom-fixed-textarea-container .textarea-wrapper {
+  flex: 1 0 8em;
+  padding: 10px;
+}
+
 .bottom-fixed-textarea-container .button-reply {
-  float: right;
-  width: 15%;
-  color: #00bcd4;
-  font-size: 2em;
+  background: #00bcd4;
+  color: white;
+  font-size: 1.75em;
   text-align: center;
   display: block;
-  box-sizing: border-box;
-  padding-bottom: 5px;
   cursor: pointer;
   user-select: none;
+  flex: 0 0 auto;
+  width: 45px;
+  height: 45px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 15px;
+  z-index: 1;
+  box-sizing: border-box;
 }
 
 .flex-container {
@@ -321,3 +333,8 @@ img.around-app-logo {
   color: #ACACAC;
   font-size: 0.75em;
 }
+
+.clearfix {
+  clear: both;
+}
+

@@ -98,7 +98,7 @@ class ThreadView extends Component {
                 <div className="flex-scalable-content">
                     {this._getThreadByIdFromStore(this.props.match.params.threadId)}
                 </div>
-                <div className="bottom-fixed-textarea-container flex-fixed">
+                <div className="bottom-fixed-textarea-container">
                     <AutoResizingTextarea 
                             className="new-around-input-textarea textarea-container" 
                             value={this.state.valueToBePosted} 
